@@ -1,0 +1,364 @@
+
+:root {
+    /* These can often be mapped to Tailwind's extended theme in tailwind.config.js
+       or used for direct CSS properties where Tailwind might not have a direct utility. */
+    --primary-blue: #1a73e8;
+    --light-blue: #00bfff;
+    --dark-blue-bg: rgba(0, 30, 60, 0.8);
+    --black-bg: rgba(0, 0, 0, 1);
+    --border-blue: rgba(0, 102, 255, 0.6);
+    --shadow-blue: rgba(0, 102, 255, 0.6);
+    --gray-text: #bbb;
+    --light-gray-bg: #f9f6ee;
+    --chatbot-bot-bg: #e5e5ea;
+    --chatbot-user-bg: #007bff;
+    --whatsapp-green: #25d366;
+    --call-orange: #ff5722;
+}
+
+/* Animations that *must* be in custom CSS because Tailwind doesn't define @keyframes */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Applied directly to the main-content div in JSX using a class `animate-fadeIn` */
+
+
+/* Hero Section Grid Animations */
+/* These properties define the 3D space and basic layout for the grid visualization.
+   The specific transforms and colors are often dynamically manipulated by JS or animations. */
+.gridWrapper {
+    width: 400px; /* Base width */
+    height: 400px; /* Base height */
+    position: relative;
+    margin: 0 auto;
+    perspective: 1000px; /* Creates the 3D perspective */
+    overflow: visible; /* Allows elements to extend beyond the wrapper */
+    /* Box-shadow applied via Tailwind in JSX for consistency if possible, or here if complex */
+}
+
+.grid-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d; /* Ensures children are positioned in 3D space */
+    transform: rotateX(60deg) rotateZ(45deg); /* Initial isometric rotation */
+    animation: float 10s ease-in-out infinite; /* Floating animation */
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: rotateX(60deg) rotateZ(45deg) translateY(0);
+    }
+    50% {
+        transform: rotateX(60deg) rotateZ(45deg) translateY(-20px);
+    }
+}
+
+.isoGrid {
+    position: absolute;
+    width: 500px; /* Larger than gridWrapper to prevent clipping during rotation */
+    height: 500px; /* Larger than gridWrapper to prevent clipping during rotation */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the larger grid */
+    display: grid;
+    grid-template-columns: repeat(10, 50px); /* Default cell size */
+    grid-template-rows: repeat(10, 50px);
+}
+
+.grid-cell {
+    position: relative;
+    width: 40px; /* Inner cell size */
+    height: 40px; /* Inner cell size */
+    margin: 5px; /* Spacing between cells */
+    transform-style: preserve-3d;
+}
+
+.cell-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(41, 128, 185, 0.2); /* Base cell color */
+    border: 1px solid rgba(52, 152, 219, 0.5); /* Cell border */
+    transform-style: preserve-3d;
+    transition: all 0.5s ease-in-out; /* For JS-driven hover/interaction effects */
+}
+
+.pulse {
+    animation: pulse-up 3s infinite; /* Specific pulse animation */
+}
+
+@keyframes pulse-up {
+    0%,
+    100% {
+        transform: translateZ(0); /* Z-position for 3D depth */
+        background: rgba(41, 128, 185, 0.2);
+    }
+    50% {
+        transform: translateZ(40px); /* Moves cell forward in 3D space */
+        background: rgba(52, 152, 219, 0.9);
+        box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+    }
+}
+
+.hero-right-logo {
+    /* Most styles like display, alignment, background, border-radius, shadow are in Tailwind in JSX */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering for fixed position relative to parent */
+    transform-style: preserve-3d; /* Essential for 3D animation */
+    z-index: 100;
+    animation: logo-float 5s ease-in-out infinite;
+}
+
+@keyframes logo-float {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) translateZ(50px); /* Adds 3D depth movement */
+    }
+    50% {
+        transform: translate(-50%, -50%) translateZ(80px);
+    }
+}
+
+.data-stream {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(52, 152, 219, 0) 0%,
+        rgba(52, 152, 219, 1) 50%,
+        rgba(52, 152, 219, 0) 100%
+    ); /* Gradient for stream effect */
+    animation: stream-move 4s linear infinite;
+    opacity: 0.7;
+    z-index: 50;
+    transform-style: preserve-3d; /* Necessary for stream's 3D positioning */
+}
+
+@keyframes stream-move {
+    0% {
+        transform: translateX(-100%) translateZ(20px); /* Moves stream across and forward in 3D */
+    }
+    100% {
+        transform: translateX(200%) translateZ(20px);
+    }
+}
+
+.info-pill {
+    position: absolute;
+    /* Other styles like padding, background, color, font-size, border-radius, shadow are in Tailwind in JSX */
+    opacity: 0;
+    z-index: 90;
+    animation: fade-in-out 6s infinite;
+}
+
+@keyframes fade-in-out {
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    20%,
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo Slider (Partner Slider) Animation */
+.logos {
+    animation: slide 35s linear infinite; /* Continuous sliding animation */
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%); /* Moves the duplicated content off-screen */
+    }
+}
+
+/* Contact Section Data Visualization Animations */
+.circle-pulse {
+    /* Most styles like position, top/left, transform, width/height, border-radius, background, shadow
+       are handled directly by Tailwind classes in JSX. */
+    animation: pulse-grow 3s ease-in-out infinite; /* Main pulse animation */
+}
+
+/* Pseudo-elements for nested pulses are now handled with Tailwind's `before:` and `after:` in JSX.
+   Their animations are defined here. */
+.circle-pulse::before {
+    animation: pulse-grow 3s ease-in-out infinite 0.5s;
+}
+.circle-pulse::after {
+    animation: pulse-grow 3s ease-in-out infinite 1s;
+}
+
+@keyframes pulse-grow {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.connection-line {
+    position: absolute;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 123, 255, 0.5),
+        transparent
+    );
+    height: 2px;
+    animation: line-pulse 3s ease-in-out infinite;
+}
+
+@keyframes line-pulse {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.data-node {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
+    animation: node-pulse 3s ease-in-out infinite;
+}
+
+@keyframes node-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+.message-bubble {
+    position: absolute;
+    /* Other styles like padding, background, border-radius, font-size, shadow, color, max-width, white-space
+       are handled by Tailwind classes in JSX. */
+    animation: message-float 5s ease-in-out infinite;
+}
+
+@keyframes message-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Animate on Scroll */
+/* These styles are the initial state for elements that will be animated into view by JavaScript.
+   The `transition` property ensures a smooth animation when JS changes `opacity` and `transform`. */
+.about-card,
+.why-card,
+.member-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+
+/* Media Queries for Responsive Adjustments (for specific elements where Tailwind's defaults aren't enough or for more granular control) */
+
+@media (max-width: 1024px) {
+    .gridWrapper {
+        width: clamp(250px, 70vw, 400px); /* Adjusting size for tablets */
+        height: clamp(250px, 70vw, 400px);
+    }
+    .isoGrid {
+        width: clamp(250px, 70vw, 500px);
+        height: clamp(250px, 70vw, 500px);
+        grid-template-columns: repeat(10, minmax(25px, 50px)); /* Adjust cell size */
+        grid-template-rows: repeat(10, minmax(25px, 50px));
+    }
+    /* Logo slider img width and gap are handled by clamp() and Tailwind gap-5/gap-3 in JSX */
+}
+
+@media (max-width: 768px) {
+    /* Hamburger styling handled via Tailwind classes and JS toggle on 'active' state in JSX */
+    /* nav max-height and overflow also handled by Tailwind and JS toggle in JSX */
+
+    .gridWrapper {
+        width: clamp(200px, 80vw, 300px);
+        height: clamp(200px, 80vw, 300px);
+    }
+    .isoGrid {
+        width: clamp(200px, 80vw, 400px);
+        height: clamp(200px, 80vw, 400px);
+        grid-template-columns: repeat(10, minmax(15px, 40px));
+        grid-template-rows: repeat(10, minmax(15px, 40px));
+    }
+    .hero-right-logo {
+        width: clamp(80px, 20vw, 100px);
+        height: clamp(80px, 20vw, 100px);
+    }
+    /* info-pill font-size and padding handled by clamp() in Tailwind in JSX */
+    /* animation-container height and circle-pulse size handled by clamp() in Tailwind in JSX */
+}
+
+@media (max-width: 480px) {
+    /* Header/hamburger sizing handled by clamp() in Tailwind in JSX */
+    /* Hero section padding and text sizes handled by clamp() in Tailwind in JSX */
+    .gridWrapper {
+        width: clamp(150px, 90vw, 200px);
+        height: clamp(150px, 90vw, 200px);
+        overflow: visible; /* Ensure it's not clipped on very small screens */
+    }
+    .isoGrid {
+        width: clamp(150px, 90vw, 250px);
+        height: clamp(150px, 90vw, 250px);
+        grid-template-columns: repeat(10, minmax(10px, 25px));
+        grid-template-rows: repeat(10, minmax(10px, 25px));
+    }
+    .hero-right-logo {
+        /* This was set to display: none in the original media query, so keeping that here. */
+        display: none;
+    }
+    .info-pill {
+        /* This was set to display: none in the original media query, so keeping that here. */
+        display: none;
+    }
+    /* Logos img width handled by clamp() in Tailwind in JSX */
+    /* Section h2/h3/p font sizes handled by clamp() in Tailwind in JSX */
+    /* Contact form input/textarea padding/font-size handled by clamp() in Tailwind in JSX */
+    .animation-container {
+        /* This was set to display: none in the original media query, so keeping that here. */
+        display: none;
+    }
+    /* Footer sizing and font sizes handled by clamp() in Tailwind in JSX */
+    /* FAB and Chatbot sizing handled by clamp() in Tailwind in JSX */
+}

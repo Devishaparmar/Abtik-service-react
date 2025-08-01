@@ -1,0 +1,48 @@
+/* Map Marker Animations */
+.map-animation-container svg {
+  overflow: visible;
+}
+
+@keyframes map-marker-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes map-marker-shadow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: scaleX(1);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scaleX(0.7);
+    opacity: 0.2;
+  }
+  60% {
+    transform: scaleX(0.9);
+    opacity: 0.3;
+  }
+}
+
+.map-marker-group {
+  animation: map-marker-bounce 2s ease infinite;
+  transform-origin: 50px 85px;
+}
+
+.map-marker-shadow {
+  animation: map-marker-shadow 2s ease infinite;
+  transform-origin: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .map-animation-container svg {
+    width: 80px;
+  }
+}

@@ -1,0 +1,39 @@
+/* Custom Animations */
+@keyframes pulse-grow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes line-pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Placeholder */
+::placeholder {
+  color: gray;
+}
+
+.mycontact-form input:focus::placeholder,
+.mycontact-form textarea:focus::placeholder {
+  opacity: 0;
+}
