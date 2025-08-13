@@ -257,6 +257,26 @@ const App = () => {
                     to { opacity: 1; transform: translateY(0); }
                 }
             `}</style>
+
+
+
+                   {/* Floating Chatbot */}
+            <iframe
+                src="https://chat.vengoai.app/?agentId=98471870"
+                style={{
+                    position: "fixed",
+                    
+                    bottom: "20px",
+                    right: "20px",
+                    width: "350px",
+                    height: "500px",
+                    border: "none",
+                    zIndex: 9999,
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                }}
+                title="Chatbot"
+            ></iframe>
         </>
     );
 };

@@ -221,7 +221,7 @@ nav("/contact")
     );
   };
 
-  return (
+  return (<>
     <div className="font-['DM_Sans'] bg-black text-white min-h-screen">
       <style jsx>{`
         @keyframes fadeIn {
@@ -284,6 +284,26 @@ nav("/contact")
 
    <Footer/>
     </div>
+
+
+           {/* Floating Chatbot */}
+            <iframe
+                src="https://chat.vengoai.app/?agentId=98471870"
+                style={{
+                    position: "fixed",
+                    
+                    bottom: "20px",
+                    right: "20px",
+                    width: "350px",
+                    height: "500px",
+                    border: "none",
+                    zIndex: 9999,
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                }}
+                title="Chatbot"
+            ></iframe>
+    </>
   );
 };
 

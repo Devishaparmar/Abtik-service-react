@@ -185,7 +185,8 @@ const Funding = () => {
         };
     }, []);
 
-    return (
+    return (<>
+    
         <div className="font-inter text-white bg-gradient-to-br from-[#001e3c]/80 to-black min-h-screen opacity-0 animate-[fadeIn_1s_ease-in_forwards]">
             {/* Header */}
             <Navbar />
@@ -251,6 +252,26 @@ const Funding = () => {
                 }
             `}</style>
         </div>
+
+
+               {/* Floating Chatbot */}
+            <iframe
+                src="https://chat.vengoai.app/?agentId=98471870"
+                style={{
+                    position: "fixed",
+                    
+                    bottom: "20px",
+                    right: "20px",
+                    width: "350px",
+                    height: "500px",
+                    border: "none",
+                    zIndex: 9999,
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                }}
+                title="Chatbot"
+            ></iframe>
+    </>
     );
 };
 
